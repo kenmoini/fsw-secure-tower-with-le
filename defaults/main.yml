@@ -1,0 +1,4 @@
+---
+# defaults file for kenmoini.fsw-secure-tower-with-le
+fqdn: "{{ inventory_hostname }}"
+email: email@example.com

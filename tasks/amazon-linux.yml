@@ -1,0 +1,9 @@
+# Amazon Linux specific task lists
+
+- name: Amazon Linux - Install or update yum-utils
+  package:
+    name: yum-utils
+    state: latest
+
+- name: Amazon Linux - Enable the EPEL Repo
+  shell: yum-config-manager --enable epel

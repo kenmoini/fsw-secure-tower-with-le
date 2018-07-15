@@ -1,0 +1,36 @@
+---
+# tasks file for kenmoini.fsw-secure-tower-with-le
+
+- name: Detect AWS
+  include: "detect_aws.yml"
+
+- name: Tasks for Red Hat Enterprise Linux (RHEL)
+  include: "rhel.yml"
+  when: ansible_distribution == 'RedHat'
+
+- name: Tasks for CentOS
+  include: "centos.yml"
+  when: ansible_distribution == 'CentOS'
+
+- name: Tasks for Amazon Linux
+  include: "amazon-linux.yml"
+  when: ansible_distribution == 'Amazon'
+
+- name: Tasks for Ubuntu
+  include: "ubuntu.yml"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install Let's Encrypt
+  include: "install-le.yml"
+
+- name: Setup Diffie-Hellman (get a coffee)
+  include: "setup-dh.yml"
+
+- name: Configure Diffie-Hellman
+  include: "configure-dh.yml"
+
+- name: Configure nginx with FQDN
+  include: "configure-nginx.yml"
+
+- name: Configure Let's Encrypt
+  include: "configure-le.yml"

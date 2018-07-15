@@ -1,0 +1,7 @@
+---
+# handlers file for kenmoini.fsw-secure-tower-with-le
+- name: restart nginx service
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes

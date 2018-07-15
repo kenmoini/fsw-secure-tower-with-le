@@ -1,0 +1,21 @@
+# Tasks to configure the Lets Encrypt install
+
+- name: Configure LE - Check if we've generated a cert already
+  stat: path=/etc/letsencrypt/live/{{ fqdn }}/fullchain.pem
+  register: cert_status
+
+- name: Configure LE - Generate certs
+  shell: "letsencrypt --nginx -d {{ fqdn }} --email {{ le_email }} --noninteractive --agree-tos"
+  when: cert_status.stat.exists == False
+  notify: restart nginx service
+
+- name: Configure LE - Renew certs
+  shell: "letsencrypt renew --noninteractive --agree-tos"
+  when: cert_status.stat.exists == True
+  notify: restart nginx service
+
+- name: Configure LE - Create cronjob
+  cron:
+    name: "renew certbot weekly"
+    special_time: weekly
+    job: "certbot renew --noninteractive --agree-tos"

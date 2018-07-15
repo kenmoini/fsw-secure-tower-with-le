@@ -1,0 +1,39 @@
+---
+# Red Hat tasks file for kenmoini.fsw-secure-tower-with-le
+
+- name: RHEL - Install EPEL Repos
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+
+- name: RHEL - Install or update yum-utils
+  yum:
+    name: yum-utils
+    state: latest
+
+- name: RHEL - Enable RHEL Extras Repo (AWS)
+  shell: "yum-config-manager --enable rhui-REGION-rhel-server-extras"
+# yum_repository doesn't work with AWS and RHUI repos?
+#  yum_repository:
+#    name: rhui-REGION-rhel-server-extras
+#    enabled: yes
+  when: is_aws_environment
+
+- name: RHEL - Enable RHEL Optional Repo (AWS)
+  shell: "yum-config-manager --enable rhui-REGION-rhel-server-optional"
+#  yum_repository:
+#    name: rhui-REGION-rhel-server-optional
+#    enabled: yes
+  when: is_aws_environment
+
+- name: RHEL - Enable RHEL Extras Repo (Normal)
+  yum_repository:
+    name: rhel-7-server-extras-rpms
+    enabled: yes
+  when: not is_aws_environment
+
+- name: RHEL - Enable RHEL Optional Repo (Normal)
+  yum_repository:
+    name: rhel-7-server-optional-rpms
+    enabled: yes
+  when: not is_aws_environment

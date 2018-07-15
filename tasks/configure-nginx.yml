@@ -1,0 +1,18 @@
+# Task list to configure nginx with the FQDN
+
+- name: Configure nginx - Backup nginx configuration
+  copy:
+    src: /etc/nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf.bak-{{ ansible_date_time.epoch }}
+
+- name: Configure nginx - Configure Ansible Tower's nginx configuration with the FQDN
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '^\s(.*)server_name(.*)$'
+    line: "server_name {{ fqdn }};"
+
+# Restart now instead of with a handler, need that FQDN set
+- name: Configure nginx - Reload nginx config
+  service:
+    name: nginx
+    state: restarted

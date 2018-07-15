@@ -1,0 +1,10 @@
+# Task for installing Diffie-Hellman SSL parameters
+
+- name: Setup DH - Check to see if we already got dhparams generated
+  stat:
+    path: /etc/ssl/certs/tower-dhparam.pem
+  register: dh_stats
+
+- name: Setup DH - Generate dhparams - this is going to take a while
+  shell: openssl dhparam -out /etc/ssl/certs/tower-dhparam.pem 2048
+  when: dh_stats.stat.exists == false

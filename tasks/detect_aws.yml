@@ -1,0 +1,36 @@
+- name: Detect AWS - Check if inside AWS infrastructure
+  uri:
+    url: http://169.254.169.254/latest/meta-data
+    timeout: 2
+  register: aws_uri_check
+  failed_when: False
+
+- name: Detect AWS - Set Infrastructure Facts
+  set_fact:
+    is_in_aws_network: "{{ aws_uri_check.status == 200 }}"
+
+- name: Detect AWS - Get facts
+  setup:
+    filter: ansible_bios_version
+  register: aws_fact_check
+
+- name: Detect AWS - Set BIOS facts
+  set_fact:
+    is_aws_bios: "{{ aws_fact_check.ansible_facts.ansible_bios_version.find('amazon') != -1 }}"
+
+#- name: Detect AWS - Debug Found BIOS?
+#  debug:
+#    var: is_aws_bios
+
+- name: Detect AWS - Compile Environment Information
+  set_fact:
+    is_aws_environment: true
+  when: ( is_aws_bios == true ) or ( is_in_aws_network == true)
+
+#- name: Detect AWS - Debug is_aws_environment
+#  debug:
+#    var: is_aws_environment
+
+#- name: Detect AWS - Debug extra
+#  debug:
+#    var: ansible_distribution

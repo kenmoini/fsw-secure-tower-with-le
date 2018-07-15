@@ -1,0 +1,7 @@
+---
+# Lets Encrypt Install tasks file for kenmoini.fsw-secure-tower-with-le
+
+- name: Install LE - Install Let's Encrypt
+  package:
+    name: python-certbot-nginx
+    state: latest

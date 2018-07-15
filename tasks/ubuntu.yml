@@ -1,0 +1,11 @@
+---
+# Ubuntu distro tasks file for kenmoini.fsw-secure-tower-with-le
+
+- name: Ubuntu - Add Let's Encrypt PPA
+  apt_repository:
+    repo: ppa:certbot/certbot
+    state: present
+
+- name: Ubuntu - Update apt to pull in Let's Encrypt Repo
+  apt:
+    update_cache: yes

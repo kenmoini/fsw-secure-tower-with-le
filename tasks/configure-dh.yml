@@ -1,0 +1,13 @@
+# Task to add the dhparams to the nginx configuration
+
+- name: Configure DH - Read the nginx conf
+  shell: cat /etc/nginx/nginx.conf
+  register: dhparam_stats
+
+- name: Configure DH - Add dhparam to nginx configuration if needed
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '^\s(.*)keepalive_timeout(.*)$'
+    line: 'keepalive_timeout 65; ssl_dhparam /etc/ssl/certs/tower-dhparam.pem;'
+  when: dhparam_stats.stdout.find('ssl_dhparam') == -1
+  notify: restart nginx service

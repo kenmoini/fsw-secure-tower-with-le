@@ -1,0 +1,12 @@
+---
+# CentOS tasks file for kenmoini.fsw-secure-tower-with-le
+
+- name: CentOS - Install EPEL Repos
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+
+- name: CentOS - Install or update yum-utils
+  yum:
+    name: yum-utils
+    state: latest
