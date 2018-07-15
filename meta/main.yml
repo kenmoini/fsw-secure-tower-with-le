@@ -39,6 +39,9 @@ galaxy_info:
   - name: CentOS
     version:
     - 7
+  - name: Amazon
+    version:
+    - 7
   - name: Ubuntu
     version:
     - 16
