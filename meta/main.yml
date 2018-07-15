@@ -35,22 +35,28 @@ galaxy_info:
   platforms:
   - name: EL
     versions:
-    - 7
+      - 7
   - name: Amazon
   - name: Ubuntu
     version:
-    - xenial
-    - trusty
+      - xenial
+      - trusty
+
+  categories:
+    - security
 
   galaxy_tags:
-  - ansible
-  - tower
-  - awx
-  - letsencrypt
-  - le
-  - rhel
-  - ubuntu
-  - centos
+    - secure
+    - https
+    - ssl
+    - ansible
+    - tower
+    - awx
+    - letsencrypt
+    - le
+    - rhel
+    - ubuntu
+    - centos
 
 dependencies: []
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,
