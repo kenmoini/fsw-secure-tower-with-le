@@ -33,19 +33,14 @@ galaxy_info:
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
   platforms:
-  - name: Red Hat
+  - name: EL
     versions:
     - 7
-  - name: CentOS
-    version:
-    - 7
   - name: Amazon
-    version:
-    - 7
   - name: Ubuntu
     version:
-    - 16
-    - 18
+    - xenial
+    - trusty
 
   galaxy_tags:
   - ansible

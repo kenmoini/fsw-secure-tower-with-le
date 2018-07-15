@@ -5,7 +5,7 @@ A simple role, to do an important task: secure an Ansible Tower installation wit
 
 Assumes default installation of Ansible Tower from latest package, and a FQDN.
 
-Supports RHEL/CentOS 7 and Ubuntu 16+
+Supports RHEL/CentOS 7, Amazon Linux, and Ubuntu 16+
 
 Requirements
 ------------
